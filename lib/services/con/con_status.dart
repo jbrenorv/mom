@@ -1,0 +1,1 @@
+enum ConStatus { on, off }
