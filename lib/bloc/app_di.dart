@@ -20,12 +20,8 @@ abstract class AppDi {
       value: ConStatusServiceImpl(),
     ),
 
-    RepositoryProvider<MomPublisherService>.value(
-      value: MomPublisherServiceImpl(),
-    ),
-
-    RepositoryProvider<MomSubscriberService>.value(
-      value: MomSubscriberServiceImpl(),
+    RepositoryProvider<MomService>.value(
+      value: MomServiceImpl(),
     ),
 
     RepositoryProvider<ExternalStorageService>.value(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mom/services/mom/mom_publisher_service.dart';
+import 'package:mom/pages/client_page.dart';
 
+import '../services/mom/mom_service.dart';
 import '../widgets/application_typy_button_widget.dart';
+import 'sensors_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -13,15 +15,12 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
 
-  late final MomPublisherService _publisherService;
-  final _txtCtrl = TextEditingController();
+  late final MomService _momService;
 
   @override
   void initState() {
-    _publisherService = context.read<MomPublisherService>();
-    // _publisherService.connect('ws://127.0.0.1:61613');
-    _publisherService.connect('127.0.0.1', 1883);
-    
+    _momService = context.read<MomService>();
+    _momService.connect();
     super.initState();
   }
 
@@ -74,7 +73,11 @@ class _WelcomePageState extends State<WelcomePage> {
                 Flexible(
                   child: ApplicationTypyButtonWidget(
                     onTap: () {
-                      
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SensorsPage(),
+                        ),
+                      );
                     },
                     text: 'Sensor',
                   ),
@@ -82,28 +85,17 @@ class _WelcomePageState extends State<WelcomePage> {
                 Flexible(
                   child: ApplicationTypyButtonWidget(
                     onTap: () {
-                      
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ClientPage(),
+                        ),
+                      );
                     },
                     text: 'Client',
                   ),
                 ),
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _txtCtrl,
-                  ),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    _publisherService.publish(_txtCtrl.text);
-                  },
-                  child: const Text('Send'),
-                ),
-              ],
-            )
           ],
         ),
       ),
