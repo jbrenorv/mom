@@ -12,18 +12,15 @@ void main() async {
   runApp(
     MultiRepositoryProvider(
       providers: AppDi.repositories,
-      child: MultiBlocProvider(
-        providers: AppDi.blocs,
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark(useMaterial3: false).copyWith(
-            appBarTheme: const AppBarTheme(
-              elevation: 0,
-            ),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(useMaterial3: false).copyWith(
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
           ),
-          home: const WelcomePage(),
         ),
+        home: const WelcomePage(),
       ),
     )
   );
